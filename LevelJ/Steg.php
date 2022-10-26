@@ -147,8 +147,36 @@ class Steg
      */
     public function show($dst)
     {
-        $msg = '000010000100001000000';
+        $msg = '';
+        $srcImg = ImageCreateFromPng($dst);
+        list($width, $height) = getimagesize($dst);
+
+        $k = 0;
+        $stop = 0;
+        for ($i = 0; $i < $width; ++$i) {
+            for ($j = 0; $j < $height; ++$j) {
+                $rgb = imagecolorat($srcImg, $i, $j);
+                $b = $rgb & 0xFF;
+
+                $blue = decbin($b);
+                $char = substr($blue, -1);
+                if ('1' === $char) {
+                    ++$stop;
+                } else {
+                    $stop = 0;
+                }
+                if ($stop < 6) {
+                    $msg .= $char;
+                }
+                if ($stop === 6) {
+                    break 2;
+                }
+
+            }
+        }
+
         $this->bin2Text($msg);
+
 
         return true;
     }
