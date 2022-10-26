@@ -24,7 +24,7 @@ class Sec
     public function hackSaltGenerator()
     {
         // @TODO
-        return "aaa";
+        return "yadsendeW";
     }
 
     /**
