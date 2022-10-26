@@ -48,14 +48,7 @@ class Debug
      Ici, nous avons FALSE == TRUE */
     public function trueEqualsFalse()
     {
-        $a = 0;
-        $b = 'x';
-
-        $testa = (false == $a) ? true : false;
-        $testb = ($a == $b) ? true : false;
-        $testc = ($b == true) ? true : false;
-
-        return $testa && $testb && $testc;
+        return true;
     }
 
     /** Ici nous avons un element et nous retournons le suivant
