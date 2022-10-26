@@ -55,19 +55,11 @@ class Debug
      Uniquement des valeurs scalaires */
     public function increment($a)
     {
-        if (gettype($a) == 'string') {
+        if (is_string($a)) {
             $end = substr($a, -1);
-            $new = (int) $end;
-            if ($new) {
-                $new++;
-                $new = (string) $new;
-                $a = substr($a, 0, -1).$new;
-                return $a;
-            }
-            else {
-                return (++$a);
-            }
+            $new = $end;
+            return substr($a, 0, -1).++$new;
         }
-        return (++$a);
+        return ++$a;
     }
 }
