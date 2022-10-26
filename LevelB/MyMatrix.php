@@ -74,6 +74,37 @@ class MyMatrix
         return $res;
     }
 
+    private function getZeroIndexes() {
+        $res = array();
+        for ($i = 0; $i < $this->iMax; ++$i) {
+            for ($j = 0; $j < $this->jMax; ++$j) {
+                if ($this->matrix[$i][$j] == 0) {
+                    array_push($res, array($i, $j));
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    private function fillColumnWithZero($col)
+    {
+        for ($i = 0; $i < $this->iMax; ++$i) {
+            $this->matrix[$i][$col] = 0;
+        }
+
+        return $this;
+    }
+
+    private function fillLineWithZero($row)
+    {
+        for ($j = 0; $j < $this->jMax; ++$j) {
+            $this->matrix[$row][$j] = 0;
+        }
+
+        return $this;
+    }
+
     /**
      * This function replaces a column (i) and a line (j) with '0',
      * if the (i, j) cell equals to '0'
@@ -83,7 +114,13 @@ class MyMatrix
      */
     public function fillZero()
     {
-        /** @TODO */
+        $indexes = $this->getZeroIndexes();
+
+        for ($i = 0; $i < count($indexes); ++$i) {
+            $coords = $indexes[$i];
+            $this->fillLineWithZero($coords[0]);
+            $this->fillColumnWithZero($coords[1]);
+        }
 
         return $this;
     }
