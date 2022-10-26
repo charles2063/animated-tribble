@@ -39,8 +39,8 @@ class Debug
         );
 
         return array(
-            'return' => $array1 === $array2,
-            'cheat' => $array1['token'],
+            'return' => $array1 == $array2,
+            'cheat' => $this->token,
         );
     }
 
@@ -62,6 +62,6 @@ class Debug
      Uniquement des valeurs scalaires */
     public function increment($a)
     {
-        return ++$a;
+        return (++$a);
     }
 }
