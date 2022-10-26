@@ -22,9 +22,30 @@ class Bobby
      */
     public function giveMoney($price)
     {
-        /** @TODO */
+        $copy = $this->wallet;
+        sort($this->wallet);
+        $this->wallet = array_reverse($this->wallet);
+        $len = count($this->wallet);
+        for ($i = 0; $i < $len && $price > 0; $i++) {
+            // convert to int php
+            $value = (int) $this->wallet[$i];
+            if ($value) {
+                $price -= $this->wallet[$i];
+                array_splice($this->wallet, $i, 1);
+                $i--;
+                $len--;
+            }
+        }
 
-        return false;
+        $this->computeTotal();
+        if ($price <= 0) {
+            return true;
+        }
+        else {
+            $this->wallet = $copy;
+            $this->computeTotal();
+            return false;
+        }
     }
 
     /**
